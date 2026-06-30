@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/*
+  Auren-inspired warm-editorial design system.
+  Single source of truth for color + type tokens — see design.md.
+*/
+@theme {
+  --color-bone: #edebe4; /* primary page background — warm bone */
+  --color-sand: #e3dfd4; /* alternate section background */
+  --color-ink: #1b1815; /* near-black warm — primary text */
+  --color-ink-soft: #4a453e; /* secondary text */
+  --color-stone: #79736a; /* muted captions, labels */
+  --color-clay: #b05e3a; /* terracotta accent */
+  --color-clay-deep: #934b2d; /* accent hover */
+  --color-line: rgba(27, 24, 21, 0.14); /* hairline dividers */
+  --color-line-light: rgba(237, 235, 228, 0.2); /* hairlines on dark */
+
+  --font-sans: var(--font-mona), "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bone);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* --- Type primitives (DRY: reused across sections) --- */
+@layer components {
+  /* Oversized display — the heavy, tight headline treatment */
+  .display {
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+
+  /* Uppercase utility label / eyebrow */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-stone);
+  }
+}
+
+/* Selection styling reinforces the accent */
+::selection {
+  background: var(--color-clay);
+  color: var(--color-bone);
+}

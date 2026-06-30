@@ -63,36 +63,49 @@ export function SiteNav(): React.ReactElement {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label="Toggle menu"
-            className="flex flex-col gap-[5px] p-2"
+            className="grid size-9 place-items-center text-ink transition-colors hover:text-clay"
           >
-          <span
-            className={`h-px w-6 bg-ink transition-transform duration-300 ${open ? "translate-y-[6px] rotate-45" : ""}`}
-          />
-          <span
-            className={`h-px w-6 bg-ink transition-opacity duration-300 ${open ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`h-px w-6 bg-ink transition-transform duration-300 ${open ? "-translate-y-[6px] -rotate-45" : ""}`}
-          />
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              aria-hidden
+            >
+              {open ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 8h16M4 16h16" />
+              )}
+            </svg>
           </button>
         </div>
       </nav>
 
       {/* Mobile panel */}
       <div
-        className={`grid overflow-hidden border-line bg-bone/95 backdrop-blur-md transition-all duration-300 md:hidden ${
-          open ? "grid-rows-[1fr] border-b" : "grid-rows-[0fr]"
+        className={`grid bg-transparent backdrop-blur-sm transition-all duration-300 md:hidden ${
+          open ? "grid-rows-[1fr] border-b border-line" : "grid-rows-[0fr]"
         }`}
       >
-        <ul className="flex min-h-0 flex-col gap-1 px-6 py-2 text-ink">
+        <ul className="flex min-h-0 flex-col overflow-hidden px-6 pb-3">
           {ALL_LINKS.map((link) => (
-            <li key={link.href}>
+            <li key={link.href} className="border-t border-line first:border-t-0">
               <Link
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="block py-3 text-2xl font-semibold tracking-tight"
+                className="group flex items-center justify-between py-3.5 text-sm font-medium tracking-tight text-ink-soft transition-colors hover:text-clay"
               >
                 {link.label}
+                <span
+                  aria-hidden
+                  className="text-stone transition-colors group-hover:text-clay"
+                >
+                  ↗
+                </span>
               </Link>
             </li>
           ))}

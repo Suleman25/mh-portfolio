@@ -33,6 +33,15 @@ Accent budget: terracotta only on the headline/footer period accent, the
 availability dot, hover states, stat figures, and the email CTA. Everything
 else is ink-on-bone.
 
+**shadcn compatibility:** `globals.css` also exposes the standard shadcn
+semantic tokens (`--background`, `--foreground`, `--card`, `--popover`,
+`--primary`, `--secondary`, `--muted`, `--accent`, `--destructive`, `--border`,
+`--input`, `--ring`, `--radius`) — each mapped onto this same palette
+(`primary` = clay, `secondary`/`muted`/`accent` = sand, `background` = bone,
+`foreground` = ink). Adopting the structure changes nothing visually; it just
+lets shadcn components drop in on-brand later. The project tokens (`bone`,
+`sand`, `ink`, …) remain the ones components actually use.
+
 ---
 
 ## Typography

@@ -1,35 +1,104 @@
 @import "tailwindcss";
 
 /*
-  Auren-inspired warm-editorial design system.
-  Single source of truth for color + type tokens — see design.md.
+  shadcn-compatible token layer mapped onto the warm-editorial palette.
+  The shadcn semantic tokens (background/card/primary/…) point at the same
+  bone/clay/ink values used everywhere — adopting the structure changes nothing
+  visually. Project tokens (bone/sand/ink/…) are kept so components are untouched.
+  See design.md.
 */
-@theme {
-  --color-bone: #edebe4; /* primary page background — warm bone */
-  --color-sand: #e3dfd4; /* alternate section background */
-  --color-ink: #1b1815; /* near-black warm — primary text */
-  --color-ink-soft: #4a453e; /* secondary text */
-  --color-stone: #79736a; /* muted captions, labels */
-  --color-clay: #b05e3a; /* terracotta accent */
-  --color-clay-deep: #934b2d; /* accent hover */
-  --color-line: rgba(27, 24, 21, 0.14); /* hairline dividers */
-  --color-line-light: rgba(237, 235, 228, 0.2); /* hairlines on dark */
+:root {
+  /* shadcn semantic tokens → warm palette */
+  --background: #edebe4; /* bone */
+  --foreground: #1b1815; /* ink */
+  --card: #edebe4;
+  --card-foreground: #1b1815;
+  --popover: #edebe4;
+  --popover-foreground: #1b1815;
+  --primary: #b05e3a; /* clay */
+  --primary-foreground: #edebe4;
+  --secondary: #e3dfd4; /* sand */
+  --secondary-foreground: #1b1815;
+  --muted: #e3dfd4;
+  --muted-foreground: #79736a; /* stone */
+  --accent: #e3dfd4;
+  --accent-foreground: #1b1815;
+  --destructive: #a23a2a; /* warm brick */
+  --destructive-foreground: #edebe4;
+  --border: rgba(27, 24, 21, 0.14);
+  --input: rgba(27, 24, 21, 0.14);
+  --ring: #b05e3a;
+  --radius: 0.5rem; /* sharp-leaning; components opt into radius explicitly */
+
+  /* project design tokens (warm-editorial system) */
+  --bone: #edebe4;
+  --sand: #e3dfd4;
+  --ink: #1b1815;
+  --ink-soft: #4a453e;
+  --stone: #79736a;
+  --clay: #b05e3a;
+  --clay-deep: #934b2d;
+  --line: rgba(27, 24, 21, 0.14);
+  --line-light: rgba(237, 235, 228, 0.2);
+}
+
+@theme inline {
+  /* shadcn token mappings */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* project palette */
+  --color-bone: var(--bone);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-stone: var(--stone);
+  --color-clay: var(--clay);
+  --color-clay-deep: var(--clay-deep);
+  --color-line: var(--line);
+  --color-line-light: var(--line-light);
 
   --font-sans: var(--font-mona), "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 }
 
-body {
-  background: var(--color-bone);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+html {
+  scroll-behavior: smooth;
 }
 
 @media (prefers-reduced-motion: reduce) {

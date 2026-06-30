@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "motion/react";
+import { CountUp } from "@/components/count-up";
 import { SITE, STATS } from "@/lib/site";
 
 export function Hero(): React.ReactElement {
@@ -76,7 +77,8 @@ export function Hero(): React.ReactElement {
               {STATS.map((stat) => (
                 <div key={stat.label}>
                   <dt className="display text-3xl text-clay md:text-4xl">
-                    {stat.value}
+                    <CountUp to={stat.value} duration={1} />
+                    {stat.suffix}
                   </dt>
                   <dd className="mt-1 max-w-[7rem] text-sm leading-tight text-stone">
                     {stat.label}

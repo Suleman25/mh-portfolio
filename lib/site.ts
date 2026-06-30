@@ -34,10 +34,10 @@ export const NAV_LINKS: readonly NavLink[] = [
 ] as const;
 
 // Headline figures (p2 "Experience").
-export const STATS: readonly { value: string; label: string }[] = [
-  { value: "5+", label: "Years of experience" },
-  { value: "80+", label: "Completed Projects" },
-  { value: "100%", label: "Job Success Rate" },
+export const STATS: readonly { value: number; suffix: string; label: string }[] = [
+  { value: 5, suffix: "+", label: "Years of experience" },
+  { value: 80, suffix: "+", label: "Completed Projects" },
+  { value: 100, suffix: "%", label: "Job Success Rate" },
 ] as const;
 
 // Remaining "Experience" items — working style.
@@ -64,11 +64,40 @@ export const PROJECT_TYPES: readonly string[] = [
   "Retail",
 ] as const;
 
-export const SERVICES: readonly string[] = [
-  "Architectural Drafting",
-  "Construction Documentation",
-  "Interior Drafting",
-  "SketchUp Modeling",
-  "Lumion Rendering",
-  "Architectural Visualization",
+export interface Service {
+  readonly name: string;
+  readonly description: string;
+}
+
+export const SERVICES: readonly Service[] = [
+  {
+    name: "Architectural Drafting",
+    description:
+      "Precise 2D plans, sections, and elevations drawn to scale and ready for permits or construction.",
+  },
+  {
+    name: "Construction Documentation",
+    description:
+      "Detailed drawing sets that communicate every dimension, material, and assembly to the build team.",
+  },
+  {
+    name: "Interior Drafting",
+    description:
+      "Layouts, furniture plans, and millwork details that turn interior concepts into buildable drawings.",
+  },
+  {
+    name: "SketchUp Modeling",
+    description:
+      "Accurate 3D models of buildings and interiors, ready for design review or rendering.",
+  },
+  {
+    name: "Lumion Rendering",
+    description:
+      "Photorealistic stills and walkthroughs that bring designs to life with real light and materials.",
+  },
+  {
+    name: "Architectural Visualization",
+    description:
+      "High-impact visuals that help clients and stakeholders see a project before it is built.",
+  },
 ] as const;

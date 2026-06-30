@@ -32,11 +32,8 @@ export function Hero(): React.ReactElement {
           animate="visible"
           className="flex flex-1 flex-col"
         >
-          {/* Top meta — name left, availability right */}
-          <div className="flex items-start justify-between gap-6">
-            <motion.p variants={item} className="eyebrow">
-              {SITE.name} — Portfolio {SITE.portfolioYear}
-            </motion.p>
+          {/* Top meta — availability right */}
+          <div className="flex items-start justify-end gap-6">
             <motion.p
               variants={item}
               className="hidden items-center gap-2 text-right text-sm text-ink-soft sm:flex"
@@ -54,7 +51,10 @@ export function Hero(): React.ReactElement {
           {/* Headline */}
           <h1 className="display my-auto py-10 text-[clamp(2.75rem,10vw,9.5rem)]">
             {headline.map((line, i) => (
-              <span key={line} className="block overflow-hidden">
+              <span
+                key={line}
+                className="block overflow-hidden pb-[0.2em] -mb-[0.2em]"
+              >
                 <motion.span variants={item} className="block">
                   {line}
                   {i === headline.length - 1 && (

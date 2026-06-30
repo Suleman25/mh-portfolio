@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { NAV_LINKS, SITE } from "@/lib/site";
 
 const ALL_LINKS = [...NAV_LINKS, { label: "Contact", href: "/#contact" }];
@@ -48,16 +49,19 @@ export function SiteNav(): React.ReactElement {
           >
             Contact
           </Link>
+          <ThemeToggle />
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label="Toggle menu"
-          className="flex flex-col gap-[5px] p-2 md:hidden"
-        >
+        {/* Mobile cluster */}
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label="Toggle menu"
+            className="flex flex-col gap-[5px] p-2"
+          >
           <span
             className={`h-px w-6 bg-ink transition-transform duration-300 ${open ? "translate-y-[6px] rotate-45" : ""}`}
           />
@@ -67,7 +71,8 @@ export function SiteNav(): React.ReactElement {
           <span
             className={`h-px w-6 bg-ink transition-transform duration-300 ${open ? "-translate-y-[6px] -rotate-45" : ""}`}
           />
-        </button>
+          </button>
+        </div>
       </nav>
 
       {/* Mobile panel */}

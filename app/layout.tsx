@@ -21,7 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>): React.ReactElement {
   return (
-    <html lang="en" className={`${monaSans.variable} antialiased`}>
+    <html
+      lang="en"
+      className={`${monaSans.variable} antialiased`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Apply stored theme before paint to avoid a flash. Light is default. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.theme==='dark')document.documentElement.classList.add('dark')}catch(e){}`,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

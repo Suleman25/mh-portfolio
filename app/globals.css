@@ -42,6 +42,37 @@
   --line-light: rgba(237, 235, 228, 0.2);
 }
 
+/* Dark theme — same warm system inverted. Toggled via `.dark` on <html>. */
+.dark {
+  --background: #16140f;
+  --foreground: #ece9e2;
+  --card: #1f1c16;
+  --card-foreground: #ece9e2;
+  --popover: #1f1c16;
+  --popover-foreground: #ece9e2;
+  --primary: #c47148;
+  --primary-foreground: #16140f;
+  --secondary: #1f1c16;
+  --secondary-foreground: #ece9e2;
+  --muted: #1f1c16;
+  --muted-foreground: #8d8678;
+  --accent: #1f1c16;
+  --accent-foreground: #ece9e2;
+  --border: rgba(236, 233, 226, 0.14);
+  --input: rgba(236, 233, 226, 0.14);
+  --ring: #c47148;
+
+  --bone: #16140f;
+  --sand: #1f1c16;
+  --ink: #ece9e2;
+  --ink-soft: #b8b2a7;
+  --stone: #8d8678;
+  --clay: #c47148;
+  --clay-deep: #a85f38;
+  --line: rgba(236, 233, 226, 0.14);
+  --line-light: rgba(27, 24, 21, 0.2);
+}
+
 @theme inline {
   /* shadcn token mappings */
   --color-background: var(--background);

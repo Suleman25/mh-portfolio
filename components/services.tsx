@@ -23,7 +23,7 @@ export function Services(): React.ReactElement {
                 </h3>
                 <span
                   aria-hidden
-                  className="text-stone transition-all duration-300 group-hover:rotate-90 group-hover:text-clay"
+                  className="text-2xl text-stone transition-all duration-300 group-hover:rotate-90 group-hover:text-clay md:text-3xl"
                 >
                   ↗
                 </span>

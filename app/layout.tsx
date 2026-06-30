@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Mona_Sans } from "next/font/google";
+import { Mona_Sans, Allura } from "next/font/google";
 import "./globals.css";
 
 const monaSans = Mona_Sans({
   variable: "--font-mona",
   subsets: ["latin"],
   axes: ["wdth"],
+  display: "swap",
+});
+
+// Signature script — used only for the footer credit.
+const signature = Allura({
+  variable: "--font-signature",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -23,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${monaSans.variable} antialiased`}
+      className={`${monaSans.variable} ${signature.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>

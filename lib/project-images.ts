@@ -5,8 +5,7 @@ export type GalleryImage = { src: string; caption: string; width: number; height
 export type ProjectImages = { cover: string; gallery: GalleryImage[] };
 
 export const IDENTITY_IMAGES = {
-  "residence": "/identity/residence.png",
-  "portrait": "/identity/portrait.png"
+  "residence": "/identity/residence.png"
 } as const;
 
 export const PROJECT_IMAGES: Record<string, ProjectImages> = {

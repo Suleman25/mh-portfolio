@@ -29,31 +29,29 @@ function ChipList({
 export function About(): React.ReactElement {
   return (
     <section id="about" className="scroll-mt-20 bg-sand">
-      <div className="mx-auto grid max-w-[1600px] gap-12 px-6 py-20 sm:px-10 md:grid-cols-[0.85fr_1.15fr] md:gap-16 md:py-28">
-        {/* Portrait on a dark panel */}
+      <div className="mx-auto grid max-w-[1600px] gap-12 px-6 py-20 sm:px-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16 md:py-28">
+        {/* Portrait — light panel matched to the image background */}
         <Reveal className="relative">
-          <div className="relative aspect-[4/5] overflow-hidden bg-ink">
+          <div className="relative aspect-[4/5] overflow-hidden">
             <Image
-              src={SITE.images.portrait}
+              src="/identity/moiez-portrait.png"
               alt={`${SITE.name}, ${SITE.title}`}
               fill
-              sizes="(max-width: 768px) 100vw, 36vw"
-              className="object-contain object-bottom"
+              priority
+              sizes="(max-width: 768px) 100vw, 34vw"
+              className="object-cover object-top"
             />
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
-              <span className="text-lg font-extrabold lowercase tracking-tight text-bone">
-                {SITE.wordmark}
-              </span>
-              <span className="eyebrow !text-bone/60">Lahore · Remote</span>
-            </div>
           </div>
         </Reveal>
 
         {/* Bio + skills */}
-        <div className="flex flex-col justify-between gap-12">
+        <div className="flex flex-col gap-10">
           <Reveal>
-            <p className="eyebrow">About</p>
-            <p className="mt-6 text-2xl font-medium leading-snug tracking-tight md:text-3xl">
+            <div className="flex items-center justify-between gap-4">
+              <p className="eyebrow">About</p>
+              <p className="eyebrow !text-stone">Lahore · Remote</p>
+            </div>
+            <p className="mt-6 text-pretty text-2xl font-medium leading-tight tracking-tight md:text-4xl">
               {SITE.subtitle}
             </p>
             <div className="mt-6 space-y-4 text-base text-ink-soft md:text-lg">
@@ -65,7 +63,7 @@ export function About(): React.ReactElement {
 
           <Reveal
             delay={0.1}
-            className="grid gap-8 border-t border-line pt-8 sm:grid-cols-2"
+            className="grid gap-8 border-t border-line pt-8 sm:grid-cols-2 md:mt-auto"
           >
             <ChipList label="Software" items={SOFTWARE} />
             <ChipList label="Project Types" items={PROJECT_TYPES} />

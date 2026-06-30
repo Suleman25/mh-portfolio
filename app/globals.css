@@ -142,7 +142,7 @@ html {
 @layer components {
   /* Oversized display — the heavy, tight headline treatment */
   .display {
-    font-weight: 800;
+    font-weight: 650;
     line-height: 0.92;
     letter-spacing: -0.03em;
   }

@@ -1,11 +1,27 @@
 import { SITE } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
-import { ArrowCircle } from "@/components/arrow-circle";
+import { Wordmark } from "@/components/wordmark";
+import FlowingMenu from "@/components/flowing-menu";
 
-const CONTACT_LINES: { label: string; value: string; href: string }[] = [
-  { label: "Email", value: SITE.email, href: `mailto:${SITE.email}` },
-  { label: "Phone", value: SITE.phone, href: `tel:${SITE.phoneHref}` },
-  { label: "LinkedIn", value: SITE.linkedinLabel, href: SITE.linkedin },
+const CONTACT_ITEMS: { label: string; text: string; link: string; image: string }[] = [
+  {
+    label: "Email",
+    text: SITE.email,
+    link: `mailto:${SITE.email}`,
+    image: "/projects/3d-model-rendering/exterior-render.png",
+  },
+  {
+    label: "Phone",
+    text: SITE.phone,
+    link: `tel:${SITE.phoneHref}`,
+    image: "/projects/3d-model-rendering/living-room.jpg",
+  },
+  {
+    label: "LinkedIn",
+    text: SITE.linkedinLabel,
+    link: SITE.linkedin,
+    image: "/projects/3d-model-rendering/stair-lobby.jpg",
+  },
 ];
 
 export function SiteFooter(): React.ReactElement {
@@ -23,51 +39,44 @@ export function SiteFooter(): React.ReactElement {
 
         <Reveal
           delay={0.1}
-          className="mt-12 grid gap-10 border-t border-line-light pt-10 md:grid-cols-[1fr_auto] md:items-end"
+          className="mt-12 border-t border-line-light pt-10"
         >
           <p className="max-w-xl text-lg text-bone/75 md:text-xl">
             Available worldwide for architectural drafting, construction
             documentation, 3D modeling, and visualization — supporting
             architects, interior designers, and developers remotely.
           </p>
-          <a
-            href={`mailto:${SITE.email}`}
-            className="group flex items-center gap-4 text-2xl font-semibold tracking-tight transition-colors hover:text-clay md:text-3xl"
-          >
-            {SITE.email}
-            <ArrowCircle className="!bg-clay !text-bone" />
-          </a>
         </Reveal>
 
-        {/* Contact details */}
+        {/* Contact register — hover-reveal flowing marquee menu */}
         <Reveal
           delay={0.15}
-          className="mt-16 grid gap-px overflow-hidden rounded-lg border border-line-light bg-line-light sm:grid-cols-3"
+          className="mt-16 h-[270px] overflow-hidden border-y border-line-light sm:h-[300px]"
         >
-          {CONTACT_LINES.map((line) => (
-            <a
-              key={line.label}
-              href={line.href}
-              target={line.label === "LinkedIn" ? "_blank" : undefined}
-              rel={line.label === "LinkedIn" ? "noopener noreferrer" : undefined}
-              className="group bg-ink p-6 transition-colors hover:bg-ink/80"
-            >
-              <span className="eyebrow !text-bone/50">{line.label}</span>
-              <span className="mt-2 block text-base text-bone transition-colors group-hover:text-clay">
-                {line.value}
-              </span>
-            </a>
-          ))}
+          <FlowingMenu
+            items={CONTACT_ITEMS}
+            speed={15}
+            bgColor="transparent"
+            textColor="var(--color-bone)"
+            marqueeBgColor="var(--color-clay)"
+            marqueeTextColor="var(--color-bone)"
+            borderColor="var(--color-line-light)"
+          />
         </Reveal>
 
         <div className="mt-16 flex flex-col gap-4 border-t border-line-light pt-8 text-sm text-bone/55 md:flex-row md:items-center md:justify-between">
-          <span className="text-base font-extrabold lowercase tracking-tight text-bone">
-            {SITE.wordmark}
+          <span className="text-base font-extrabold capitalize tracking-tight text-bone">
+            <Wordmark />
           </span>
           <span>
             {SITE.title} · © {SITE.portfolioYear} {SITE.name}
           </span>
         </div>
+
+        {/* Signature credit — hand-signed feel */}
+        <p className="mt-12 text-right text-2xl leading-none text-bone/80 [font-family:var(--font-signature)] md:text-3xl">
+          Made by his <span className="text-clay">wife&apos;s brother</span>
+        </p>
       </div>
     </footer>
   );

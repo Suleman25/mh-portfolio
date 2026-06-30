@@ -3,16 +3,19 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { NAV_LINKS, SITE } from "@/lib/site";
+import { Wordmark } from "@/components/wordmark";
+import { NAV_LINKS } from "@/lib/site";
 
 const ALL_LINKS = [...NAV_LINKS, { label: "Contact", href: "/#contact" }];
 
 export function SiteNav(): React.ReactElement {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  // Show the nav only over the first (hero) section; hide past it.
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    const onScroll = (): void => setScrolled(window.scrollY > 24);
+    const onScroll = (): void =>
+      setHidden(window.scrollY > window.innerHeight * 0.85);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -20,16 +23,16 @@ export function SiteNav(): React.ReactElement {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        scrolled ? "bg-bone/85 backdrop-blur-md" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 bg-transparent transition-transform duration-300 ${
+        hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
       <nav className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 sm:px-10">
         <Link
           href="/"
-          className="text-lg font-extrabold tracking-tight lowercase text-ink"
+          className="text-lg font-extrabold tracking-tight capitalize text-ink"
         >
-          {SITE.wordmark}
+          <Wordmark />
         </Link>
 
         {/* Desktop links */}

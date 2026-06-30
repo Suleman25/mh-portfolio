@@ -3,15 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE } from "@/lib/site";
-import {
-  getAdjacent,
-  getAllSlugs,
-  getProject,
-  type ProcessStep,
-} from "@/lib/projects";
+import { getAdjacent, getAllSlugs, getProject } from "@/lib/projects";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { ProjectGallery } from "@/components/project-gallery";
+import { Reveal } from "@/components/reveal";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -29,21 +25,41 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
-function MetaBlock({
-  label,
-  items,
-}: {
-  label: string;
-  items: readonly string[];
-}): React.ReactElement {
+type Spec = { label: string; items: readonly string[] };
+
+// Labeled hairline divider opening each block on the detail page.
+function SectionRule({ label }: { label: string }): React.ReactElement {
   return (
-    <div className="border-t border-line pt-4">
+    <div className="flex items-center gap-4 pb-5">
       <p className="eyebrow">{label}</p>
-      <ul className="mt-3 space-y-1.5 text-sm text-ink-soft md:text-base">
-        {items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
+      <span className="h-px flex-1 bg-line" />
+    </div>
+  );
+}
+
+// A cell in the specification grid — single values render plain;
+// lists render as a numbered schedule (title-block style).
+function SpecGroup({ label, items }: Spec): React.ReactElement {
+  return (
+    <div className="bg-bone p-6 md:p-8">
+      <p className="eyebrow">{label}</p>
+      {items.length === 1 ? (
+        <p className="mt-4 text-base text-ink-soft md:text-lg">{items[0]}</p>
+      ) : (
+        <ol className="mt-5 space-y-2.5">
+          {items.map((item, i) => (
+            <li
+              key={item}
+              className="flex gap-3 text-sm leading-snug text-ink-soft md:text-base"
+            >
+              <span className="pt-0.5 text-xs tabular-nums text-clay">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ol>
+      )}
     </div>
   );
 }
@@ -57,6 +73,14 @@ export default async function ProjectPage({ params }: Params): Promise<React.Rea
   const coverImg =
     project.gallery.find((g) => g.src === project.cover) ?? project.gallery[0];
   const restImages = project.gallery.filter((g) => g.src !== project.cover);
+
+  const specs: Spec[] = [
+    project.role && { label: "My Role", items: project.role },
+    project.deliverables && { label: "Deliverables", items: project.deliverables },
+    project.materials && { label: "Material Palette", items: project.materials },
+    project.scope && { label: "Scope of Work", items: project.scope },
+    project.location && { label: "Location", items: [project.location] },
+  ].filter((s): s is Spec => Boolean(s));
 
   return (
     <>
@@ -99,60 +123,74 @@ export default async function ProjectPage({ params }: Params): Promise<React.Rea
             />
           </div>
 
-          {/* Overview + meta */}
-          <section className="mt-12 grid gap-10 md:mt-16 md:grid-cols-[1fr_1.4fr] md:gap-16">
-            <aside className="flex flex-col gap-6">
-              {project.role && <MetaBlock label="My Role" items={project.role} />}
-              {project.deliverables && (
-                <MetaBlock label="Deliverables" items={project.deliverables} />
-              )}
-              {project.materials && (
-                <MetaBlock label="Material Palette" items={project.materials} />
-              )}
-              {project.scope && (
-                <MetaBlock label="Scope of Work" items={project.scope} />
-              )}
-              {project.location && (
-                <MetaBlock label="Location" items={[project.location]} />
-              )}
-            </aside>
-
-            <div>
-              <p className="eyebrow">Overview</p>
-              <p className="mt-5 text-pretty text-2xl font-medium leading-snug tracking-tight md:text-3xl">
-                {project.description}
-              </p>
-              {project.note && (
-                <p className="mt-6 text-base text-ink-soft md:text-lg">
-                  {project.note}
+          {/* Overview */}
+          <section className="mt-14 md:mt-24">
+            <Reveal className="grid gap-8 md:grid-cols-[1fr_2fr] md:gap-16">
+              <div className="md:pt-1">
+                <span className="display block leading-[0.78] text-[clamp(4.5rem,11vw,9rem)] text-clay/20">
+                  {project.number}
+                </span>
+                <p className="eyebrow mt-6">Overview</p>
+              </div>
+              <div>
+                <p className="text-pretty text-2xl font-light italic leading-snug tracking-tight text-ink/55 md:text-[2.25rem] md:leading-[1.15]">
+                  {project.description}
                 </p>
-              )}
+                {project.note && (
+                  <p className="mt-8 max-w-2xl border-l-2 border-clay pl-5 text-base leading-relaxed text-ink-soft md:text-lg">
+                    {project.note}
+                  </p>
+                )}
+              </div>
+            </Reveal>
 
-              {project.highlights && (
-                <ul className="mt-10 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
-                  {project.highlights.map((h) => (
-                    <li key={h} className="bg-bone p-5 text-base text-ink-soft">
-                      {h}
+            {/* Specification schedule — title-block grid */}
+            {specs.length > 0 && (
+              <Reveal delay={0.1} className="mt-14 md:mt-20">
+                <SectionRule label="Project Specifications" />
+                <div className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+                  {specs.map((s) => (
+                    <SpecGroup key={s.label} label={s.label} items={s.items} />
+                  ))}
+                </div>
+              </Reveal>
+            )}
+
+            {/* Project highlights */}
+            {project.highlights && (
+              <Reveal delay={0.1} className="mt-14 md:mt-20">
+                <SectionRule label="Project Highlights" />
+                <ul className="grid gap-px border border-line bg-line sm:grid-cols-2">
+                  {project.highlights.map((h, i) => (
+                    <li key={h} className="flex gap-4 bg-bone p-6 md:p-8">
+                      <span className="pt-1 text-xs tabular-nums text-clay">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-base text-ink-soft md:text-lg">{h}</span>
                     </li>
                   ))}
                 </ul>
-              )}
+              </Reveal>
+            )}
 
-              {project.process && (
-                <div className="mt-10 grid gap-6 sm:grid-cols-2">
-                  {project.process.map((step: ProcessStep) => (
-                    <div key={step.title} className="border-t border-line pt-4">
+            {/* Process */}
+            {project.process && (
+              <Reveal delay={0.1} className="mt-14 md:mt-20">
+                <SectionRule label="Process" />
+                <div className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+                  {project.process.map((step) => (
+                    <div key={step.title} className="bg-bone p-6 md:p-8">
                       <h3 className="text-lg font-semibold tracking-tight">
                         {step.title}
                       </h3>
-                      <p className="mt-2 text-sm text-ink-soft md:text-base">
+                      <p className="mt-3 text-sm text-ink-soft md:text-base">
                         {step.body}
                       </p>
                     </div>
                   ))}
                 </div>
-              )}
-            </div>
+              </Reveal>
+            )}
           </section>
 
           {/* Gallery */}

@@ -2,6 +2,10 @@ import Image from "next/image";
 import { PROJECT_TYPES, SITE, SOFTWARE } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
 
+// Dissolve the cutout's hard-cut bottom edge into the section background.
+const PORTRAIT_FADE =
+  "linear-gradient(to bottom, #000 0%, #000 97%, transparent 100%)";
+
 function ChipList({
   label,
   items,
@@ -40,6 +44,7 @@ export function About(): React.ReactElement {
               priority
               sizes="(max-width: 768px) 100vw, 34vw"
               className="object-cover object-top"
+              style={{ maskImage: PORTRAIT_FADE, WebkitMaskImage: PORTRAIT_FADE }}
             />
           </div>
         </Reveal>

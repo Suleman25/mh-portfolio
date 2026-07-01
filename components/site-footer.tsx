@@ -96,11 +96,6 @@ export function SiteFooter(): React.ReactElement {
             {SITE.title} · © {SITE.portfolioYear} {SITE.name}
           </span>
         </div>
-
-        {/* Signature credit — hand-signed feel */}
-        <p className="mt-12 text-right text-2xl leading-none text-bone/80 [font-family:var(--font-signature)] md:text-3xl">
-          Made by his <span className="text-clay">wife&apos;s brother</span>
-        </p>
       </div>
     </footer>
   );

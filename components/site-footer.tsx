@@ -24,10 +24,37 @@ const CONTACT_ITEMS: { label: string; text: string; link: string; image: string 
   },
 ];
 
+// Grain = clay color punched through an SVG fractal-noise alpha mask.
+const GRAIN_NOISE =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E";
+// Fade confines the grain to the bottom so it reads as a contained glow.
+const GRAIN_FADE =
+  "linear-gradient(to top, #000 0%, rgba(0,0,0,0.55) 32%, transparent 100%)";
+
 export function SiteFooter(): React.ReactElement {
   return (
-    <footer id="contact" className="scroll-mt-20 bg-ink text-bone">
-      <div className="mx-auto max-w-[1600px] px-6 py-20 sm:px-10 md:py-28">
+    <footer
+      id="contact"
+      className="relative scroll-mt-20 overflow-hidden bg-ink text-bone"
+    >
+      {/* Orange grain glow — contained at the section bottom */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%]"
+        style={{ maskImage: GRAIN_FADE, WebkitMaskImage: GRAIN_FADE }}
+      >
+        <div
+          className="absolute inset-0 bg-clay opacity-45"
+          style={{
+            maskImage: `url("${GRAIN_NOISE}")`,
+            WebkitMaskImage: `url("${GRAIN_NOISE}")`,
+            maskSize: "200px 200px",
+            WebkitMaskSize: "200px 200px",
+          }}
+        />
+      </div>
+
+      <div className="relative mx-auto max-w-[1600px] px-6 py-20 sm:px-10 md:py-28">
         <Reveal>
           <p className="eyebrow !text-bone/60">Contact</p>
           <h2 className="display mt-6 text-[clamp(2.5rem,8vw,7rem)]">

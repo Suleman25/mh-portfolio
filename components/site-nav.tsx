@@ -48,7 +48,7 @@ export function SiteNav(): React.ReactElement {
           </ul>
           <Link
             href="/#contact"
-            className="text-sm font-medium text-ink transition-colors hover:text-clay"
+            className="text-sm font-medium text-ink-soft transition-colors hover:text-clay"
           >
             Contact
           </Link>

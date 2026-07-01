@@ -37,10 +37,7 @@ export function SiteFooter(): React.ReactElement {
           </h2>
         </Reveal>
 
-        <Reveal
-          delay={0.1}
-          className="mt-12 border-t border-line-light pt-10"
-        >
+        <Reveal delay={0.1} className="mt-12">
           <p className="max-w-xl text-lg text-bone/75 md:text-xl">
             Available worldwide for architectural drafting, construction
             documentation, 3D modeling, and visualization — supporting
@@ -51,7 +48,7 @@ export function SiteFooter(): React.ReactElement {
         {/* Contact register — hover-reveal flowing marquee menu */}
         <Reveal
           delay={0.15}
-          className="mt-16 h-[270px] overflow-hidden border-y border-line-light sm:h-[300px]"
+          className="mt-16 h-[270px] sm:h-[300px]"
         >
           <FlowingMenu
             items={CONTACT_ITEMS}
@@ -64,7 +61,7 @@ export function SiteFooter(): React.ReactElement {
           />
         </Reveal>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-line-light pt-8 text-sm text-bone/55 md:flex-row md:items-center md:justify-between">
+        <div className="mt-16 flex flex-col gap-4 pt-8 text-sm text-bone/55 md:flex-row md:items-center md:justify-between">
           <span className="text-base font-extrabold capitalize tracking-tight text-bone">
             <Wordmark />
           </span>

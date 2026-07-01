@@ -152,14 +152,14 @@ export const PROJECT_IMAGES: Record<string, ProjectImages> = {
       {
         "src": "/projects/master-bedroom-permit-set/client-data-1.png",
         "caption": "Client Data",
-        "width": 320,
-        "height": 240
+        "width": 640,
+        "height": 480
       },
       {
         "src": "/projects/master-bedroom-permit-set/client-data-2.png",
         "caption": "Client Data",
-        "width": 240,
-        "height": 320
+        "width": 480,
+        "height": 640
       },
       {
         "src": "/projects/master-bedroom-permit-set/site-plan.jpg",

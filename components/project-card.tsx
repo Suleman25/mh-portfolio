@@ -9,11 +9,11 @@ export function ProjectCard({ project }: { project: Project }): React.ReactEleme
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="group flex h-full flex-col overflow-hidden border border-line bg-bone"
+      className="group grid h-full grid-rows-[1fr_auto] overflow-hidden border border-line bg-bone"
     >
       {/* Cover */}
       {isDrawing ? (
-        <div className="relative flex-1 bg-white">
+        <div className="relative bg-white">
           <div className="absolute inset-4">
             <Image
               src={project.cover}
@@ -26,7 +26,7 @@ export function ProjectCard({ project }: { project: Project }): React.ReactEleme
           <ArrowOverlay />
         </div>
       ) : (
-        <div className="relative flex-1 overflow-hidden bg-sand">
+        <div className="relative overflow-hidden bg-sand">
           <Image
             src={project.cover}
             alt={project.title}

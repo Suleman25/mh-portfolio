@@ -18,6 +18,7 @@ export function ProjectGallery({
             alt={img.caption}
             width={img.width}
             height={img.height}
+            priority={i === 0}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="h-auto w-full"
           />

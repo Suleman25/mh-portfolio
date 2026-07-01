@@ -28,7 +28,6 @@ interface MenuItemProps extends MenuItemData {
   marqueeBgColor: string;
   marqueeTextColor: string;
   borderColor: string;
-  isFirst: boolean;
 }
 
 const FlowingMenu: React.FC<FlowingMenuProps> = ({
@@ -52,7 +51,6 @@ const FlowingMenu: React.FC<FlowingMenuProps> = ({
             marqueeBgColor={marqueeBgColor}
             marqueeTextColor={marqueeTextColor}
             borderColor={borderColor}
-            isFirst={idx === 0}
           />
         ))}
       </nav>
@@ -70,7 +68,6 @@ const MenuItem: React.FC<MenuItemProps> = ({
   marqueeBgColor,
   marqueeTextColor,
   borderColor,
-  isFirst,
 }) => {
   const itemRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -181,7 +178,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     <div
       className="menu__item"
       ref={itemRef}
-      style={{ borderColor, borderTop: isFirst ? "none" : undefined }}
+      style={{ borderColor }}
     >
       <a
         className="menu__item-link"

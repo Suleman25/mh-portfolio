@@ -87,8 +87,10 @@ export function SiteNav(): React.ReactElement {
 
       {/* Mobile panel */}
       <div
-        className={`grid bg-transparent backdrop-blur-sm transition-all duration-300 md:hidden ${
-          open ? "grid-rows-[1fr] border-b border-line" : "grid-rows-[0fr]"
+        className={`grid bg-transparent transition-all duration-300 md:hidden ${
+          open
+            ? "grid-rows-[1fr] border-b border-line backdrop-blur-sm"
+            : "grid-rows-[0fr] pointer-events-none"
         }`}
       >
         <ul className="flex min-h-0 flex-col overflow-hidden px-6 pb-3">

@@ -32,14 +32,14 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${monaSans.variable} ${signature.variable} antialiased`}
+      className={`${monaSans.variable} ${signature.variable} dark antialiased`}
       suppressHydrationWarning
     >
       <head>
-        {/* Apply stored theme before paint to avoid a flash. Light is default. */}
+        {/* Apply stored theme before paint to avoid a flash. Dark is default. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(localStorage.theme==='dark')document.documentElement.classList.add('dark')}catch(e){}`,
+            __html: `try{if(localStorage.theme==='light')document.documentElement.classList.remove('dark')}catch(e){}`,
           }}
         />
       </head>

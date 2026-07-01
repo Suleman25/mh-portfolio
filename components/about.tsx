@@ -1,10 +1,7 @@
 import Image from "next/image";
 import { PROJECT_TYPES, SITE, SOFTWARE } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
-
-// Dissolve the cutout's hard-cut bottom edge into the section background.
-const PORTRAIT_FADE =
-  "linear-gradient(to bottom, #000 0%, #000 97%, transparent 100%)";
+import { PortraitArch } from "@/components/portrait-arch";
 
 function ChipList({
   label,
@@ -34,17 +31,17 @@ export function About(): React.ReactElement {
   return (
     <section id="about" className="scroll-mt-20 bg-sand">
       <div className="mx-auto grid max-w-[1600px] gap-12 px-6 py-20 sm:px-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16 md:py-28">
-        {/* Portrait — light panel matched to the image background */}
+        {/* Portrait — transparent cutout standing within an animated arch portal */}
         <Reveal className="relative">
-          <div className="relative aspect-[4/5] overflow-hidden">
+          <div className="relative aspect-[4/5]">
+            <PortraitArch />
             <Image
-              src="/identity/moiez-portrait.png"
+              src="/identity/image-removebg-preview.png"
               alt={`${SITE.name}, ${SITE.title}`}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 34vw"
-              className="object-cover object-top"
-              style={{ maskImage: PORTRAIT_FADE, WebkitMaskImage: PORTRAIT_FADE }}
+              className="object-contain object-bottom"
             />
           </div>
         </Reveal>

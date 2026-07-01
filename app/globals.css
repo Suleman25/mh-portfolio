@@ -162,3 +162,32 @@ html {
   background: var(--color-clay);
   color: var(--color-bone);
 }
+
+
+/*
+  Custom scrollbar — clay thumb on the page background. Uses palette tokens so
+  it follows light/dark automatically. Firefox uses scrollbar-* props; Chromium/
+  Edge/Safari use ::-webkit-scrollbar. Both live in plain CSS (not @layer/utility)
+  so nothing purges them — this is why it renders on prod identically to local.
+*/
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-clay) transparent;
+}
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-clay);
+  border-radius: 9999px;
+  /* Border in the page color insets the thumb so it reads as a slim pill. */
+  border: 3px solid var(--color-background);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-clay-deep);
+}
